@@ -18,49 +18,43 @@ import {
   TermometerText,
   DeviceContainer,
   DeviceItem,
-  SwitchContainer,
-  SwitchItem,
   StatusContainer,
   TabText,
   CameraContainer,
   Camera,
-  ButtonsContainer,
-  ActionButton,
 } from './styles';
 import api from '~/services/api';
 
 export default function Painel() {
   const [devices, setDevices] = useState([]);
-  const [switches, setSwitches] = useState([]);
-
   const [swhState, setSwtState] = useState({});
 
   const profile = useSelector(state => state.user.profile);
 
   useEffect(() => {
-    async function loadPainel() {
+    (async () => {
       const response = await api.get('painel', {
         params: {
           cliente: 1,
+          dev: swhState.device,
+          ste: swhState.state,
         },
       });
 
-      setDevices(response.data.devices);
-      setSwitches(response.data.switches);
-    }
-    loadPainel();
-  }, []); // eslint-disable-line
+      setDevices(response.data);
+    })().catch(err => {
+      console.error(err);
+    });
+  }, [swhState]);
 
   handleSwitch = clicked => {
     const swtc = {
-      id: clicked.name,
-      name: clicked.name,
+      device: clicked.device,
       state: !clicked.state,
-      type: clicked.type,
     };
     setSwtState(swtc);
   };
-  // console.tron.log(swhState);
+  console.tron.log(swhState);
 
   return (
     <Background>
@@ -110,26 +104,8 @@ export default function Painel() {
         <DeviceContainer>
           {devices &&
             devices.map(item => (
-              <DeviceItem key={item.id}>
-                <TabText>{item.name}</TabText>
-                <Icon
-                  name="power-settings-new"
-                  size={45}
-                  color="#FFF"
-                  style={{ marginLeft: 60 }}
-                />
-                <StatusContainer>
-                  <TabText>{item.model}</TabText>
-                </StatusContainer>
-              </DeviceItem>
-            ))}
-        </DeviceContainer>
-
-        <SwitchContainer>
-          {switches &&
-            switches.map(item => (
-              <SwitchItem
-                key={item.id}
+              <DeviceItem
+                key={item.device}
                 onPress={() => {
                   this.handleSwitch(item);
                 }}
@@ -147,11 +123,19 @@ export default function Painel() {
                   ) : (
                     <Icon name="restore" size={20} color="#fff" />
                   )}
-                  <Icon name="fiber-manual-record" size={15} color="#FFFF00" />
+                  {item.state === true ? (
+                    <Icon
+                      name="fiber-manual-record"
+                      size={15}
+                      color="#FFFF00"
+                    />
+                  ) : (
+                    <Icon name="fiber-manual-record" size={15} color="#fff" />
+                  )}
                 </StatusContainer>
-              </SwitchItem>
+              </DeviceItem>
             ))}
-        </SwitchContainer>
+        </DeviceContainer>
       </Container>
     </Background>
   );

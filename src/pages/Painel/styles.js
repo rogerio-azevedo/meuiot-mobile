@@ -62,24 +62,6 @@ export const DeviceItem = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
-export const SwitchContainer = styled.ScrollView.attrs({
-  horizontal: true,
-  contentContainerStyle: { paddingLeft: 10, paddingRight: 20 },
-  showsHorizontalScrollIndicator: false,
-})`
-  margin-top: 20px;
-`;
-
-export const SwitchItem = styled(RectButton)`
-  width: 140px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  margin-left: 10px;
-  padding: 10px;
-  justify-content: space-between;
-`;
-
 export const StatusContainer = styled.View`
   width: 100%;
   flex-direction: row;
