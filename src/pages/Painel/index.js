@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
 
 import { WebView } from 'react-native-webview';
-import logo from '~/assets/logo.png';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
 
@@ -11,7 +10,6 @@ import {
   Container,
   HeaderContainer,
   AvatarContainer,
-  Avatar,
   MenuContainer,
   WelcomeText,
   TermometerText,
@@ -76,7 +74,6 @@ export default function Painel() {
           </MenuContainer>
           <AvatarContainer>
             <Icon name="account-circle" size={45} color="#155799" />
-            {/* <Avatar source={logo} /> */}
           </AvatarContainer>
         </HeaderContainer>
 
