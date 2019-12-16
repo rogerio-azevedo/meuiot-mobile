@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOut } from '~/store/modules/auth/actions';
 
 import { WebView } from 'react-native-webview';
-
 import logo from '~/assets/logo.png';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import Background from '~/components/Background';
 
 import {
@@ -26,16 +25,18 @@ import {
 import api from '~/services/api';
 
 export default function Painel() {
+  const dispatch = useDispatch();
   const [devices, setDevices] = useState([]);
   const [swhState, setSwtState] = useState({});
 
   const profile = useSelector(state => state.user.profile);
+  const clienteId = profile.cliente;
 
   useEffect(() => {
     (async () => {
       const response = await api.get('painel', {
         params: {
-          cliente: 1,
+          cliente: clienteId,
           dev: swhState.device,
           ste: swhState.state,
         },
@@ -54,17 +55,28 @@ export default function Painel() {
     };
     setSwtState(swtc);
   };
-  console.tron.log(swhState);
+
+  handlelogOut = () => {
+    dispatch(signOut());
+  };
 
   return (
     <Background>
       <Container>
         <HeaderContainer>
           <MenuContainer>
-            <Icon name="short-text" size={40} color="#fff"></Icon>
+            <Icon
+              name="short-text"
+              size={40}
+              color="#fff"
+              onPress={() => {
+                this.handlelogOut();
+              }}
+            />
           </MenuContainer>
           <AvatarContainer>
-            <Avatar source={logo} />
+            <Icon name="account-circle" size={45} color="#155799" />
+            {/* <Avatar source={logo} /> */}
           </AvatarContainer>
         </HeaderContainer>
 
@@ -111,12 +123,22 @@ export default function Painel() {
                 }}
               >
                 <TabText>{item.name}</TabText>
-                <Icon
-                  name="power-settings-new"
-                  size={35}
-                  color="#FFF"
-                  style={{ marginLeft: 40 }}
-                />
+                {item.type === 'mom' ? (
+                  <Icon
+                    name="power-settings-new"
+                    size={35}
+                    color="#FFF"
+                    style={{ marginLeft: 40 }}
+                  />
+                ) : (
+                  <Icon
+                    name="wb-incandescent"
+                    size={35}
+                    color={item.state ? '#00ff00' : '#FFF'}
+                    style={{ marginLeft: 40 }}
+                  />
+                )}
+
                 <StatusContainer>
                   {item.type === 'ret' ? (
                     <TabText>{item.state ? 'ON' : 'OFF'}</TabText>
@@ -127,7 +149,7 @@ export default function Painel() {
                     <Icon
                       name="fiber-manual-record"
                       size={15}
-                      color="#FFFF00"
+                      color="#00ff00"
                     />
                   ) : (
                     <Icon name="fiber-manual-record" size={15} color="#fff" />
