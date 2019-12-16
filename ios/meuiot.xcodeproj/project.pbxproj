@@ -44,7 +44,7 @@
 		00E356EE1AD99517003FC87E /* meuiotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = meuiotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* meuiotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = meuiotTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* meuiot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meuiot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* meuIOT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meuIOT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = meuiot/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = meuiot/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -161,7 +161,6 @@
 				ADDD95A4FCC9479765CCDB0E /* Pods-meuiotTests.debug.xcconfig */,
 				743B222DDF941D5F2C6CE879 /* Pods-meuiotTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -190,7 +189,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* meuiot.app */,
+				13B07F961A680F5B00A75B9A /* meuIOT.app */,
 				00E356EE1AD99517003FC87E /* meuiotTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* meuiot-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* meuiot-tvOSTests.xctest */,
@@ -238,7 +237,7 @@
 			);
 			name = meuiot;
 			productName = meuiot;
-			productReference = 13B07F961A680F5B00A75B9A /* meuiot.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* meuIOT.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* meuiot-tvOS */ = {
@@ -291,7 +290,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = VM22P6DZ7R;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = VM22P6DZ7R;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -309,6 +312,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -632,6 +636,8 @@
 			baseConfigurationReference = ADDD95A4FCC9479765CCDB0E /* Pods-meuiotTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -655,7 +661,9 @@
 			baseConfigurationReference = 743B222DDF941D5F2C6CE879 /* Pods-meuiotTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				INFOPLIST_FILE = meuiotTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -677,6 +685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				INFOPLIST_FILE = meuiot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -684,8 +693,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = meuiot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meuiot;
+				PRODUCT_NAME = meuIOT;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -696,6 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				INFOPLIST_FILE = meuiot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -703,8 +713,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = meuiot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meuiot;
+				PRODUCT_NAME = meuIOT;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
