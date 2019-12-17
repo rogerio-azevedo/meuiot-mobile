@@ -16,7 +16,7 @@ export const AvatarContainer = styled.View`
   border-radius: 70px;
   padding: 3px;
   margin-top: 20px;
-  margin-right: 30px;
+  margin-right: 20px;
 `;
 
 export const Avatar = styled(Image)`
@@ -26,19 +26,19 @@ export const Avatar = styled(Image)`
 
 export const MenuContainer = styled.View`
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 20px;
 `;
 
 export const WelcomeText = styled.Text`
-  margin-top: 20px;
-  margin-left: 30px;
+  margin-top: 10px;
+  margin-left: 20px;
   font-size: 22px;
   color: #fff;
   font-weight: 700;
 `;
 
 export const TermometerText = styled.Text`
-  margin-left: 30px;
+  margin-left: 20px;
   font-size: 14px;
   color: #ccc;
   font-weight: 500;
@@ -52,10 +52,10 @@ export const DeviceContainer = styled.ScrollView.attrs({
   margin-top: 20px;
 `;
 
-export const DeviceItem = styled.TouchableOpacity`
+export const DeviceItem = styled(RectButton)`
   width: 140px;
   height: 100px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 4px;
   margin-left: 10px;
   padding: 10px;
@@ -78,12 +78,12 @@ export const CameraContainer = styled.ScrollView.attrs({
   contentContainerStyle: { paddingLeft: 10, paddingRight: 20 },
   showsHorizontalScrollIndicator: false,
 })`
-  margin-top: 40px;
+  margin-top: 25px;
 `;
 
 export const Camera = styled.View`
-  width: 370px;
-  height: 258;
+  width: 345px;
+  height: 238;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   margin-left: 10px;
