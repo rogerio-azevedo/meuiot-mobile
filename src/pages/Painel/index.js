@@ -49,7 +49,7 @@ export default function Painel() {
   handleSwitch = clicked => {
     const swtc = {
       device: clicked.device,
-      state: !clicked.state,
+      state: clicked.type === 'mom' ? true : !clicked.state,
     };
     setSwtState(swtc);
   };
