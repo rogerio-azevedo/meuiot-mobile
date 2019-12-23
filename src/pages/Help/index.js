@@ -19,7 +19,7 @@ export default function Help() {
   return (
     <Background>
       <Container>
-        <VersionText>Versão: 1.01</VersionText>
+        <VersionText>Versão: 1.02</VersionText>
         <WelcomeText>Bem vindo ao meuIOT!</WelcomeText>
         <SupportText>
           Sinta-se a vontade para fazer contato conosco para esclarecimento de
