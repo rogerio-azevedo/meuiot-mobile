@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Painel from '~/pages/Painel';
+import Profile from '~/pages/Profile';
+import Help from '~/pages/Help';
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -11,10 +13,11 @@ export default (signedIn = false) =>
       {
         Sign: createSwitchNavigator({
           SignIn,
+          Profile,
         }),
         App: createBottomTabNavigator({
           Painel,
-          SignUp,
+          Help,
         }),
       },
       {

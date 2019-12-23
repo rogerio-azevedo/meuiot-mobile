@@ -11,7 +11,7 @@ export const HeaderContainer = styled.View`
   align-items: center;
 `;
 
-export const AvatarContainer = styled.View`
+export const AvatarContainer = styled.TouchableOpacity`
   background: rgba(255, 255, 255, 0.5);
   border-radius: 70px;
   padding: 3px;

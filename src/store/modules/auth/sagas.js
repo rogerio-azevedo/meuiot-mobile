@@ -30,10 +30,10 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const { username, email, password } = payload;
 
     yield call(api.post, 'users', {
-      name,
+      username,
       email,
       password,
     });

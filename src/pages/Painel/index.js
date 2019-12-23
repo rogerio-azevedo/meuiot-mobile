@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
+import { Alert } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,9 +23,10 @@ import {
 } from './styles';
 import api from '~/services/api';
 
-export default function Painel() {
+export default function Painel({ navigation }) {
   const dispatch = useDispatch();
   const [devices, setDevices] = useState([]);
+  const [channels, setChannels] = useState([]);
   const [swhState, setSwtState] = useState({});
 
   const profile = useSelector(state => state.user.profile);
@@ -40,7 +42,8 @@ export default function Painel() {
         },
       });
 
-      setDevices(response.data);
+      setDevices(response.data.devices);
+      setChannels(response.data.channels);
     })().catch(err => {
       console.error(err);
     });
@@ -51,6 +54,7 @@ export default function Painel() {
       device: clicked.device,
       state: clicked.type === 'mom' ? true : !clicked.state,
     };
+    console.tron.log(swtc);
     setSwtState(swtc);
   };
 
@@ -58,56 +62,39 @@ export default function Painel() {
     dispatch(signOut());
   };
 
+  // handleAlert = () => {
+  //   let alert = 'Version: 1.01';
+
+  //   Alert.alert(alert);
+  // };
+
   return (
     <Background>
       <Container>
         <HeaderContainer>
           <MenuContainer>
-            <Icon
-              name="short-text"
-              size={40}
-              color="#fff"
-              onPress={() => {
-                this.handlelogOut();
-              }}
-            />
+            <Icon name="short-text" size={30} color="#fff" />
           </MenuContainer>
-          <AvatarContainer>
-            <Icon name="account-circle" size={45} color="#155799" />
+          <AvatarContainer onPress={() => navigation.navigate('Profile')}>
+            <Icon name="account-circle" size={35} color="#155799" />
           </AvatarContainer>
         </HeaderContainer>
 
         <WelcomeText>Olá, {profile.username}</WelcomeText>
-        <TermometerText>Temperatura externa: 36°C</TermometerText>
+        <TermometerText>Temperatura externa: 37°C</TermometerText>
 
         <CameraContainer>
-          <Camera>
-            <WebView
-              originWhitelist={['*']}
-              source={{
-                uri:
-                  'http://peantonio.ddns.net:8081/cgi-bin/mjpg/video.cgi?channel=0&subtype=1',
-              }}
-            />
-          </Camera>
-          <Camera>
-            <WebView
-              originWhitelist={['*']}
-              source={{
-                uri:
-                  'http://peantonio.ddns.net:8081/cgi-bin/mjpg/video.cgi?channel=0&subtype=1',
-              }}
-            />
-          </Camera>
-          <Camera>
-            <WebView
-              originWhitelist={['*']}
-              source={{
-                uri:
-                  'http://peantonio.ddns.net:8081/cgi-bin/mjpg/video.cgi?channel=0&subtype=1',
-              }}
-            />
-          </Camera>
+          {channels &&
+            channels.map(item => (
+              <Camera key={item.id}>
+                <WebView
+                  originWhitelist={['*']}
+                  source={{
+                    uri: item.url,
+                  }}
+                />
+              </Camera>
+            ))}
         </CameraContainer>
 
         <DeviceContainer>
