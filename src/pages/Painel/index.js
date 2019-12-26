@@ -54,7 +54,6 @@ export default function Painel({ navigation }) {
       device: clicked.device,
       state: clicked.type === 'mom' ? true : !clicked.state,
     };
-    console.tron.log(swtc);
     setSwtState(swtc);
   };
 

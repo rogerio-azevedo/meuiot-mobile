@@ -347,7 +347,7 @@
 			baseConfigurationReference = F6DA9CAD0A3FB0A3440508D2 /* Pods-meuiot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				INFOPLIST_FILE = meuiot/Info.plist;
@@ -369,7 +369,7 @@
 			baseConfigurationReference = 396ABF226CC94392F1E97492 /* Pods-meuiot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				INFOPLIST_FILE = meuiot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
