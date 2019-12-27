@@ -31,6 +31,7 @@
 		54E2882602D79BBDF7270EA3 /* libPods-meuiotTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-meuiotTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		743B222DDF941D5F2C6CE879 /* Pods-meuiotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meuiotTests.release.xcconfig"; path = "Target Support Files/Pods-meuiotTests/Pods-meuiotTests.release.xcconfig"; sourceTree = "<group>"; };
 		9425156893DD9E1878317903 /* libPods-meuiot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-meuiot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB721FA223B558F6008ECC9B /* meuIOT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = meuIOT.entitlements; path = meuiot/meuIOT.entitlements; sourceTree = "<group>"; };
 		ADDD95A4FCC9479765CCDB0E /* Pods-meuiotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meuiotTests.debug.xcconfig"; path = "Target Support Files/Pods-meuiotTests/Pods-meuiotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B13B0339F1C8654CAC8A9081 /* Pods-meuiot-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meuiot-tvOS.release.xcconfig"; path = "Target Support Files/Pods-meuiot-tvOS/Pods-meuiot-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		CC61F29B2117D2FC976A46F4 /* libPods-meuiot-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-meuiot-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +74,7 @@
 		13B07FAE1A68108700A75B9A /* meuiot */ = {
 			isa = PBXGroup;
 			children = (
+				AB721FA223B558F6008ECC9B /* meuIOT.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -177,6 +179,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = VM22P6DZ7R;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -347,6 +350,9 @@
 			baseConfigurationReference = F6DA9CAD0A3FB0A3440508D2 /* Pods-meuiot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = meuiot/meuIOT.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = VM22P6DZ7R;
@@ -360,6 +366,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.meuiot;
 				PRODUCT_NAME = meuIOT;
+				PROVISIONING_PROFILE_SPECIFIER = Development;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -369,6 +376,9 @@
 			baseConfigurationReference = 396ABF226CC94392F1E97492 /* Pods-meuiot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = meuiot/meuIOT.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VM22P6DZ7R;
 				INFOPLIST_FILE = meuiot/Info.plist;
@@ -381,6 +391,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.meuiot;
 				PRODUCT_NAME = meuIOT;
+				PROVISIONING_PROFILE_SPECIFIER = Production;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -412,6 +423,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODEPUSH_KEY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -465,6 +477,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODEPUSH_KEY = AdELnMrx4SJAUFbeCUTs3oNuwc8OYazQ435ep;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -484,6 +497,78 @@
 			};
 			name = Release;
 		};
+		AB954B1023B6BC2300DEA0D0 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODEPUSH_KEY = "yz7RcsiYbMF-sMoLh5JFMfO-XfYNBix3zlhzI";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Staging;
+		};
+		AB954B1123B6BC2300DEA0D0 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 396ABF226CC94392F1E97492 /* Pods-meuiot.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = meuiot/meuIOT.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = VM22P6DZ7R;
+				INFOPLIST_FILE = meuiot/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.01;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.meuiot;
+				PRODUCT_NAME = meuIOT;
+				PROVISIONING_PROFILE_SPECIFIER = Adhoc;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Staging;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -492,6 +577,7 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+				AB954B1123B6BC2300DEA0D0 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -501,6 +587,7 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+				AB954B1023B6BC2300DEA0D0 /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
