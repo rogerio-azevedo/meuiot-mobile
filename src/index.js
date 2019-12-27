@@ -11,7 +11,7 @@ import './config/ReactotronConfig';
 import { store, persistor } from './store';
 import App from './App';
 
-class App extends Component {
+class Index extends Component {
   constructor(props) {
     super(props);
 
@@ -48,4 +48,4 @@ class App extends Component {
 
 export default CodePush({
   checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-})(App);
+})(Index);
