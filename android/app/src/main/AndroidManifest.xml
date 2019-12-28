@@ -11,7 +11,7 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity
-      android:lauchMode="singleTop"
+        android:launchMode="singleTop"
         android:theme="@style/SplashTheme"
         android:name=".MainActivity"
         android:label="@string/app_name"
