@@ -175,7 +175,8 @@ android {
         }
        release {
           resValue "string", "reactNativeCodePush_androidDeploymentKey", '"fmIf_zZ0B2U2PeL9dpD_wdPYE26IU57Ao8lgC"'
-          minifyEnabled enableProguardInReleaseBuilds
+          minifyEnabled true
+          shrinkResources true
           proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
 
