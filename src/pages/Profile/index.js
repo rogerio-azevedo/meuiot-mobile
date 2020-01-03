@@ -26,7 +26,7 @@ export default function Profile({ navigation }) {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const [username, setUsername] = useState(profile.username);
+  const [username, setUsername] = useState(profile.name);
   const [email, setEmail] = useState(profile.email);
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');

@@ -30,7 +30,7 @@ export default function Painel({ navigation }) {
   const [swhState, setSwtState] = useState({});
 
   const profile = useSelector(state => state.user.profile);
-  const clienteId = profile.cliente;
+  const clienteId = profile.customer.id;
 
   useEffect(() => {
     (async () => {
@@ -51,7 +51,7 @@ export default function Painel({ navigation }) {
 
   handleSwitch = clicked => {
     const swtc = {
-      device: clicked.device,
+      device: clicked.id,
       state: clicked.type === 'mom' ? true : !clicked.state,
     };
     setSwtState(swtc);
@@ -60,12 +60,6 @@ export default function Painel({ navigation }) {
   handlelogOut = () => {
     dispatch(signOut());
   };
-
-  // handleAlert = () => {
-  //   let alert = 'Version: 1.01';
-
-  //   Alert.alert(alert);
-  // };
 
   return (
     <Background>
@@ -79,7 +73,7 @@ export default function Painel({ navigation }) {
           </AvatarContainer>
         </HeaderContainer>
 
-        <WelcomeText>Olá, {profile.username}</WelcomeText>
+        <WelcomeText>Olá, {profile.name}</WelcomeText>
         <TermometerText>Temperatura externa: 37°C</TermometerText>
 
         <CameraContainer>
@@ -100,7 +94,7 @@ export default function Painel({ navigation }) {
           {devices &&
             devices.map(item => (
               <DeviceItem
-                key={item.device}
+                key={item.id}
                 onPress={() => {
                   this.handleSwitch(item);
                 }}
