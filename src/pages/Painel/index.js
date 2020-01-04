@@ -28,6 +28,7 @@ export default function Painel({ navigation }) {
   const [devices, setDevices] = useState([]);
   const [channels, setChannels] = useState([]);
   const [swhState, setSwtState] = useState({});
+  const [bcolor, setBcolor] = useState('#fff');
 
   const profile = useSelector(state => state.user.profile);
   const clienteId = profile.customer.id;
@@ -37,6 +38,7 @@ export default function Painel({ navigation }) {
       const response = await api.get('painel', {
         params: {
           cliente: clienteId,
+          typ: swhState.type,
           dev: swhState.device,
           ste: swhState.state,
         },
@@ -50,8 +52,18 @@ export default function Painel({ navigation }) {
   }, [swhState]);
 
   handleSwitch = clicked => {
+    console.tron.log(clicked);
+
+    if (clicked.type === 'mom' && !clicked.state === true) {
+      setBcolor('#00ff00');
+      setTimeout(() => {
+        setBcolor('#fff');
+      }, 500);
+    }
+
     const swtc = {
       device: clicked.id,
+      type: clicked.type,
       state: clicked.type === 'mom' ? true : !clicked.state,
     };
     setSwtState(swtc);
@@ -100,21 +112,19 @@ export default function Painel({ navigation }) {
                 }}
               >
                 <TabText>{item.name}</TabText>
-                {item.type === 'mom' ? (
-                  <Icon
-                    name="power-settings-new"
-                    size={35}
-                    color="#FFF"
-                    style={{ marginLeft: 40 }}
-                  />
-                ) : (
-                  <Icon
-                    name="wb-incandescent"
-                    size={35}
-                    color={item.state ? '#00ff00' : '#FFF'}
-                    style={{ marginLeft: 40 }}
-                  />
-                )}
+
+                <Icon
+                  name={item.type === 'mom' ? 'restore' : 'wb-incandescent'}
+                  size={25}
+                  color={
+                    item.type === 'mom'
+                      ? bcolor
+                      : item.state
+                      ? '#00ff00'
+                      : '#fff'
+                  }
+                  style={{ marginLeft: 40 }}
+                />
 
                 <StatusContainer>
                   {item.type === 'ret' ? (
@@ -122,15 +132,12 @@ export default function Painel({ navigation }) {
                   ) : (
                     <Icon name="restore" size={20} color="#fff" />
                   )}
-                  {item.state === true ? (
-                    <Icon
-                      name="fiber-manual-record"
-                      size={15}
-                      color="#00ff00"
-                    />
-                  ) : (
-                    <Icon name="fiber-manual-record" size={15} color="#fff" />
-                  )}
+
+                  <Icon
+                    name="fiber-manual-record"
+                    size={15}
+                    color={item.state === true ? '#00ff00' : '#fff'}
+                  />
                 </StatusContainer>
               </DeviceItem>
             ))}
