@@ -7,8 +7,8 @@ import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
 
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
-import { View, Dimensions, StyleSheet, Text } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
+import { Dimensions } from 'react-native';
 const { width: screenWidth } = Dimensions.get('window');
 
 import {
@@ -23,7 +23,6 @@ import {
   StatusContainer,
   TabText,
   CameraContainer,
-  Camera,
 } from './styles';
 import api from '~/services/api';
 
