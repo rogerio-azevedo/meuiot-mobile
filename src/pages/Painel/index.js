@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
 import { Alert } from 'react-native';
@@ -6,6 +6,10 @@ import { Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
+
+import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import { View, Dimensions, StyleSheet, Text } from 'react-native';
+const { width: screenWidth } = Dimensions.get('window');
 
 import {
   Container,
@@ -26,9 +30,9 @@ import api from '~/services/api';
 export default function Painel({ navigation }) {
   const dispatch = useDispatch();
   const [devices, setDevices] = useState([]);
-  const [channels, setChannels] = useState([]);
   const [swhState, setSwtState] = useState({});
-  const [bcolor, setBcolor] = useState('#fff');
+  const [bcolor, setBcolor] = useState({ color: '#aaa' });
+  const [entries, setEntries] = useState([]);
 
   const profile = useSelector(state => state.user.profile);
   const clienteId = profile.customer.id;
@@ -44,21 +48,23 @@ export default function Painel({ navigation }) {
         },
       });
 
+      const links = response.data.channels.map(item => ({
+        title: item.url,
+      }));
+
       setDevices(response.data.devices);
-      setChannels(response.data.channels);
+      setEntries(links);
     })().catch(err => {
       console.error(err);
     });
   }, [swhState]);
 
   handleSwitch = clicked => {
-    console.tron.log(clicked);
-
     if (clicked.type === 'mom' && !clicked.state === true) {
-      setBcolor('#00ff00');
+      setBcolor({ id: clicked.id, color: '#159957' });
       setTimeout(() => {
-        setBcolor('#fff');
-      }, 500);
+        setBcolor({ id: clicked.id, color: '#aaa' });
+      }, 600);
     }
 
     const swtc = {
@@ -71,6 +77,21 @@ export default function Painel({ navigation }) {
 
   handlelogOut = () => {
     dispatch(signOut());
+  };
+
+  _renderItem = ({ item }) => {
+    return (
+      <CameraContainer>
+        <WebView
+          scalesPageToFit
+          scrollEnabled={false}
+          automaticallyAdjustContentInsets
+          startInLoadingState={false}
+          originWhitelist={['*']}
+          source={{ uri: item.title }}
+        />
+      </CameraContainer>
+    );
   };
 
   return (
@@ -86,21 +107,17 @@ export default function Painel({ navigation }) {
         </HeaderContainer>
 
         <WelcomeText>Olá, {profile.name}</WelcomeText>
-        <TermometerText>Temperatura externa: 37°C</TermometerText>
+        <TermometerText>Temperatura externa: 35°C</TermometerText>
 
-        <CameraContainer>
-          {channels &&
-            channels.map(item => (
-              <Camera key={item.id}>
-                <WebView
-                  originWhitelist={['*']}
-                  source={{
-                    uri: item.url,
-                  }}
-                />
-              </Camera>
-            ))}
-        </CameraContainer>
+        <Carousel
+          ref={c => {
+            _carousel = c;
+          }}
+          data={entries}
+          renderItem={_renderItem}
+          sliderWidth={screenWidth}
+          itemWidth={screenWidth}
+        />
 
         <DeviceContainer>
           {devices &&
@@ -111,34 +128,26 @@ export default function Painel({ navigation }) {
                   this.handleSwitch(item);
                 }}
               >
-                <TabText>{item.name}</TabText>
-
-                <Icon
-                  name={item.type === 'mom' ? 'restore' : 'wb-incandescent'}
-                  size={25}
-                  color={
-                    item.type === 'mom'
-                      ? bcolor
-                      : item.state
-                      ? '#00ff00'
-                      : '#fff'
-                  }
-                  style={{ marginLeft: 40 }}
-                />
-
                 <StatusContainer>
-                  {item.type === 'ret' ? (
-                    <TabText>{item.state ? 'ON' : 'OFF'}</TabText>
-                  ) : (
-                    <Icon name="restore" size={20} color="#fff" />
-                  )}
-
                   <Icon
                     name="fiber-manual-record"
-                    size={15}
-                    color={item.state === true ? '#00ff00' : '#fff'}
+                    size={18}
+                    color={
+                      item.type === 'mom' && item.id === bcolor.id
+                        ? bcolor.color
+                        : item.state
+                        ? '#159957'
+                        : '#aaa'
+                    }
                   />
                 </StatusContainer>
+                <Icon
+                  name={item.type === 'mom' ? 'restore' : 'wb-incandescent'}
+                  size={50}
+                  color={'#155799'}
+                  style={{ marginTop: 15 }}
+                />
+                <TabText>{item.name}</TabText>
               </DeviceItem>
             ))}
         </DeviceContainer>
