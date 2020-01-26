@@ -11,28 +11,28 @@ import './config/ReactotronConfig';
 import { store, persistor } from './store';
 import App from './App';
 
-class Index extends Component {
-  constructor(props) {
-    super(props);
+export default class Index extends Component {
+  // constructor(props) {
+  //   super(props);
 
-    OneSignal.init('eec43c23-7d23-4686-87c8-b8a2a1976dfd');
+  //   OneSignal.init('eec43c23-7d23-4686-87c8-b8a2a1976dfd');
 
-    OneSignal.addEventListener('received', this.onReceived);
-    OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('ids', this.onIds);
-  }
+  //   OneSignal.addEventListener('received', this.onReceived);
+  //   OneSignal.addEventListener('opened', this.onOpened);
+  //   OneSignal.addEventListener('ids', this.onIds);
+  // }
 
-  componentWillUnmount() {
-    OneSignal.addEventListener('received', this.onReceived);
-    OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('ids', this.onIds);
-  }
+  // componentWillUnmount() {
+  //   OneSignal.addEventListener('received', this.onReceived);
+  //   OneSignal.addEventListener('opened', this.onOpened);
+  //   OneSignal.addEventListener('ids', this.onIds);
+  // }
 
-  onReceived = data => {};
+  // onReceived = data => {};
 
-  onOpened = notification => {};
+  // onOpened = notification => {};
 
-  onIds = id => {};
+  // onIds = id => {};
 
   render() {
     return (
@@ -46,6 +46,6 @@ class Index extends Component {
   }
 }
 
-export default CodePush({
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-})(Index);
+// export default CodePush({
+//   checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+// })(Index);

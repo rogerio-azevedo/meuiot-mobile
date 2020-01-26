@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
 import { Alert } from 'react-native';
@@ -6,6 +6,10 @@ import { Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Background from '~/components/Background';
+
+import Carousel from 'react-native-snap-carousel';
+import { Dimensions } from 'react-native';
+const { width: screenWidth } = Dimensions.get('window');
 
 import {
   Container,
@@ -19,39 +23,52 @@ import {
   StatusContainer,
   TabText,
   CameraContainer,
-  Camera,
 } from './styles';
 import api from '~/services/api';
 
 export default function Painel({ navigation }) {
   const dispatch = useDispatch();
   const [devices, setDevices] = useState([]);
-  const [channels, setChannels] = useState([]);
   const [swhState, setSwtState] = useState({});
+  const [bcolor, setBcolor] = useState({ color: '#aaa' });
+  const [entries, setEntries] = useState([]);
 
   const profile = useSelector(state => state.user.profile);
-  const clienteId = profile.cliente;
+  const clienteId = profile.customer.id;
 
   useEffect(() => {
     (async () => {
       const response = await api.get('painel', {
         params: {
           cliente: clienteId,
+          typ: swhState.type,
           dev: swhState.device,
           ste: swhState.state,
         },
       });
 
+      const links = response.data.channels.map(item => ({
+        title: item.url,
+      }));
+
       setDevices(response.data.devices);
-      setChannels(response.data.channels);
+      setEntries(links);
     })().catch(err => {
       console.error(err);
     });
   }, [swhState]);
 
   handleSwitch = clicked => {
+    if (clicked.type === 'mom' && !clicked.state === true) {
+      setBcolor({ id: clicked.id, color: '#159957' });
+      setTimeout(() => {
+        setBcolor({ id: clicked.id, color: '#aaa' });
+      }, 600);
+    }
+
     const swtc = {
-      device: clicked.device,
+      device: clicked.id,
+      type: clicked.type,
       state: clicked.type === 'mom' ? true : !clicked.state,
     };
     setSwtState(swtc);
@@ -61,11 +78,20 @@ export default function Painel({ navigation }) {
     dispatch(signOut());
   };
 
-  // handleAlert = () => {
-  //   let alert = 'Version: 1.01';
-
-  //   Alert.alert(alert);
-  // };
+  _renderItem = ({ item }) => {
+    return (
+      <CameraContainer>
+        <WebView
+          scalesPageToFit
+          scrollEnabled={false}
+          automaticallyAdjustContentInsets
+          startInLoadingState={false}
+          originWhitelist={['*']}
+          source={{ uri: item.title }}
+        />
+      </CameraContainer>
+    );
+  };
 
   return (
     <Background>
@@ -79,65 +105,48 @@ export default function Painel({ navigation }) {
           </AvatarContainer>
         </HeaderContainer>
 
-        <WelcomeText>Olá, {profile.username}</WelcomeText>
-        <TermometerText>Temperatura externa: 37°C</TermometerText>
+        <WelcomeText>Olá, {profile.name}</WelcomeText>
+        <TermometerText>Temperatura externa: 35°C</TermometerText>
 
-        <CameraContainer>
-          {channels &&
-            channels.map(item => (
-              <Camera key={item.id}>
-                <WebView
-                  originWhitelist={['*']}
-                  source={{
-                    uri: item.url,
-                  }}
-                />
-              </Camera>
-            ))}
-        </CameraContainer>
+        <Carousel
+          ref={c => {
+            _carousel = c;
+          }}
+          data={entries}
+          renderItem={_renderItem}
+          sliderWidth={screenWidth}
+          itemWidth={screenWidth}
+        />
 
         <DeviceContainer>
           {devices &&
             devices.map(item => (
               <DeviceItem
-                key={item.device}
+                key={item.id}
                 onPress={() => {
                   this.handleSwitch(item);
                 }}
               >
-                <TabText>{item.name}</TabText>
-                {item.type === 'mom' ? (
-                  <Icon
-                    name="power-settings-new"
-                    size={35}
-                    color="#FFF"
-                    style={{ marginLeft: 40 }}
-                  />
-                ) : (
-                  <Icon
-                    name="wb-incandescent"
-                    size={35}
-                    color={item.state ? '#00ff00' : '#FFF'}
-                    style={{ marginLeft: 40 }}
-                  />
-                )}
-
                 <StatusContainer>
-                  {item.type === 'ret' ? (
-                    <TabText>{item.state ? 'ON' : 'OFF'}</TabText>
-                  ) : (
-                    <Icon name="restore" size={20} color="#fff" />
-                  )}
-                  {item.state === true ? (
-                    <Icon
-                      name="fiber-manual-record"
-                      size={15}
-                      color="#00ff00"
-                    />
-                  ) : (
-                    <Icon name="fiber-manual-record" size={15} color="#fff" />
-                  )}
+                  <Icon
+                    name="fiber-manual-record"
+                    size={18}
+                    color={
+                      item.type === 'mom' && item.id === bcolor.id
+                        ? bcolor.color
+                        : item.state
+                        ? '#159957'
+                        : '#aaa'
+                    }
+                  />
                 </StatusContainer>
+                <Icon
+                  name={item.type === 'mom' ? 'restore' : 'wb-incandescent'}
+                  size={50}
+                  color={'#155799'}
+                  style={{ marginTop: 15 }}
+                />
+                <TabText>{item.name}</TabText>
               </DeviceItem>
             ))}
         </DeviceContainer>

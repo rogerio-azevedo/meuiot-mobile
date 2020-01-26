@@ -46,47 +46,43 @@ export const TermometerText = styled.Text`
 
 export const DeviceContainer = styled.ScrollView.attrs({
   horizontal: true,
-  contentContainerStyle: { paddingLeft: 10, paddingRight: 20 },
+  contentContainerStyle: {
+    paddingLeft: 5,
+    paddingRight: 10,
+  },
   showsHorizontalScrollIndicator: false,
 })`
   margin-top: 20px;
 `;
 
 export const DeviceItem = styled(RectButton)`
-  width: 140px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.3);
+  width: 118px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
   margin-left: 10px;
-  padding: 10px;
-  justify-content: space-between;
+  padding: 5px;
+  align-items: center;
 `;
 
 export const StatusContainer = styled.View`
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 export const TabText = styled.Text`
-  font-size: 13px;
-  color: #fff;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #333;
+  text-align: center;
 `;
 
-export const CameraContainer = styled.ScrollView.attrs({
-  horizontal: true,
-  contentContainerStyle: { paddingLeft: 10, paddingRight: 20 },
-  showsHorizontalScrollIndicator: false,
-})`
-  margin-top: 25px;
-`;
-
-export const Camera = styled.View`
-  width: 345px;
-  height: 238;
-  background: rgba(255, 255, 255, 0.2);
+export const CameraContainer = styled.View`
   border-radius: 4px;
-  margin-left: 10px;
-  padding: 10px;
-  justify-content: space-between;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 263;
+  padding: 12px;
 `;
